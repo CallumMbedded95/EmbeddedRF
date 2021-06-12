@@ -36,6 +36,6 @@ void main (void)
 		GPIOB_ODR |= GPIOB12;
 		for (int i=0;i<500000;i++);
 		GPIOB_ODR &= ~GPIOB_ODR;
-		for (int i=0;i<500000;i++);
+		for (int i=0;i<500001;i++);
 	}
 }
