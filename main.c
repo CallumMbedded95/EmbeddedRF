@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "gpio_definitions.h"
 
 // Register Port enable address.
 #define RCC_BASE 0x40021000
@@ -26,6 +27,8 @@
 
 void main (void)
 {
+	set_gpio_crh(0,0,0,0);
+
 	// Directly change the GPIO register to have bit 3 to output (PB12)
 	RCC_APB2ENR |=  RCC_IOPBEN;
 	GPIOB_CRH &= 0xFFF0FFFF;
@@ -34,8 +37,8 @@ void main (void)
 	while (1)
 	{
 		GPIOB_ODR |= GPIOB12;
-		for (int i=0;i<500000;i++);
-		GPIOB_ODR &= ~GPIOB_ODR;
-		for (int i=0;i<500001;i++);
+		// for (int i=0;i<120000;i++);
+		// GPIOB_ODR &= ~GPIOB_ODR;
+		// for (int i=0;i<100001;i++);
 	}
 }

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GPIO_DEFINITIONS_H
+#define GPIO_DEFINITIONS_H
 
 #include <stdint.h>
 
@@ -22,3 +23,5 @@
 
 // GIVEN A BASE GPIO ADDRESS, GPIO NUM, CNF AND MOD STRINGS,SETS THE CRH REGISTER.;
 void set_gpio_crh(uint32_t GPIOx_ADDR, uint8_t CNF, uint8_t MOD, uint8_t GPIO_NUM);
+
+#endif

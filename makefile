@@ -13,13 +13,10 @@ all: app.bin
 crt.o: crt.s
 	$(AS) -o crt.o crt.s
 
-gpio_definitions.o: gpio_definitions.c
-	$(CC) $(CFLAGS) -c -o gpio_definitions.o gpio_definitions.c
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 
-main.o: main.c
-	$(CC) $(CFLAGS) -c -o main.o main.c
-
-app.elf: memory_map.ld crt.o main.o gpio_definitions.o
+app.elf: memory_map.ld crt.o $(OBJ)
 	$(LD) -T memory_map.ld -o app.elf crt.o gpio_definitions.o main.o 
 
 app.bin: app.elf
