@@ -6,7 +6,7 @@ BIN = arm-none-eabi-objcopy
 STL = st-flash
 CFLAGS = -mthumb -mcpu=cortex-m3
 DEPS = gpio_definitions.h
-OBJ = gpio_definitions.o main.o
+OBJ = gpio_definitions.o main.o rcc_register_control.o
 
 all: app.bin
 
@@ -17,7 +17,7 @@ crt.o: crt.s
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 app.elf: memory_map.ld crt.o $(OBJ)
-	$(LD) -T memory_map.ld -o app.elf crt.o gpio_definitions.o main.o 
+	$(LD) -T memory_map.ld -o app.elf crt.o $(OBJ)
 
 app.bin: app.elf
 	$(BIN) -O binary app.elf app.bin
