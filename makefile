@@ -6,7 +6,7 @@ BIN = arm-none-eabi-objcopy
 STL = st-flash
 CFLAGS = -mthumb -mcpu=cortex-m3
 DEPS = gpio_definitions.h
-OBJ = gpio_definitions.o main.o rcc_register_control.o
+OBJ = gpio_definitions.o main.o rcc_register_control.o timer.o
 
 all: app.bin
 

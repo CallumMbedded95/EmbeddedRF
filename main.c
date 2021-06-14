@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include "gpio_definitions.h"
 #include "rcc_register_control.h"
+#include "timer.h"
 
 #define RCC_IOPBEN (1<<3)
 
@@ -15,15 +16,24 @@ void main (void)
 	set_gpio_crh(GPIOB_BASE, 0x0, 0x1U, 0x14U);
 	set_gpio_crh(GPIOB_BASE, 0x0, 0x1U, 0x18U);
 	set_gpio_crh(GPIOB_BASE, 0x0, 0x1U, 0x1CU);
+
+	tim2_enable_clock(0xFF);
+
+	// Simply turn on PIN12
+	set_gpio_odr(GPIOB_BASE, 0x1U, 0xCU);
+	
 	while (1)
-	{		
-		set_gpio_odr(GPIOB_BASE, 0x1U, 0xCU);
-		set_gpio_odr(GPIOB_BASE, 0x1U, 0xDU);
-		set_gpio_odr(GPIOB_BASE, 0x1U, 0xEU);
-		set_gpio_odr(GPIOB_BASE, 0x1U, 0xFU);
-		for (int i=0;i<2500000;i++);
-		//GPIOB_ODR &= ~GPIOB_ODR;
-		set_gpio_odr(GPIOB_BASE, 0x0U, 0xCU);
-		for (int i=0;i<2500000;i++);
+	{
+		// Testing TIM2 Reg is configured correctly.
+		// If the ctr is above 5000 then assume the clock is running. Toggle GPIO Pin13
+		if (get_tim2_clock_ctr() > 5000)
+			set_gpio_odr(GPIOB_BASE, 0x1U, 0xDU);
+		// set_gpio_odr(GPIOB_BASE, 0x1U, 0xCU);
+		// set_gpio_odr(GPIOB_BASE, 0x1U, 0xDU);
+		// set_gpio_odr(GPIOB_BASE, 0x1U, 0xEU);
+		// set_gpio_odr(GPIOB_BASE, 0x1U, 0xFU);
+		// for (int i=0;i<2500000;i++);
+		// set_gpio_odr(GPIOB_BASE, 0x0U, 0xCU);
+		// for (int i=0;i<2500000;i++);
 	}
 }
