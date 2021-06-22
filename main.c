@@ -2,6 +2,7 @@
 #include "gpio_definitions.h"
 #include "rcc_register_control.h"
 #include "timer.h"
+#include "uart.h"
 
 #define RCC_IOPBEN (1<<3)
 
@@ -32,8 +33,10 @@ void main (void)
 		// set_gpio_odr(GPIOB_BASE, 0x1U, 0xDU);
 		// set_gpio_odr(GPIOB_BASE, 0x1U, 0xEU);
 		// set_gpio_odr(GPIOB_BASE, 0x1U, 0xFU);
-		// for (int i=0;i<2500000;i++);
-		// set_gpio_odr(GPIOB_BASE, 0x0U, 0xCU);
-		// for (int i=0;i<2500000;i++);
+
+		for (int i=0;i<5000000;i++);
+		//*(volatile uint32_t*)(UART5 + USART_CR1) |= (1<<3);
+		//WRITE DATA TO USART_DR REG
+		*(volatile uint32_t*)(UART5 + USART_DR) = 'a';
 	}
 }
