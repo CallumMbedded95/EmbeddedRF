@@ -1,6 +1,6 @@
-#include "uart.h"
-#include "rcc_register_control.h"
-#include "gpio_definitions.h"
+#include "UART.h"
+#include "RCCRegisterControl.h"
+#include "GPIODefinitions.h"
 
 // THE CLOCK CTR UPCOUNTS ALL THE WAY TO AUTO_RELOAD. (0 - AUTO RELOAD)
 void enable_uart5_tx(uint32_t UE_BIT, uint8_t M_BIT, uint8_t STOP_BITS, uint32_t BAUD_RATE)

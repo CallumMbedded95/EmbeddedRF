@@ -4,17 +4,17 @@ AS = arm-none-eabi-as
 LD = arm-none-eabi-ld
 BIN = arm-none-eabi-objcopy
 STL = st-flash
-CFLAGS = -mthumb -mcpu=cortex-m3
-DEPS = gpio_definitions.h
-OBJ = gpio_definitions.o main.o rcc_register_control.o timer.o uart.o
+CFLAGS = -fno-exceptions -mthumb -mcpu=cortex-m3
+#DEPS = gpio_definitions.h
+OBJ = GPIODefinitions.o main.o RCCRegisterControl.o Timer.o #UART.o
 
 all: app.bin
 
 crt.o: crt.s
 	$(AS) -o crt.o crt.s
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $^
+%.o: %.cpp
+	$(CXX) $(CFLAGS) -c -o $@ $^
 
 app.elf: memory_map.ld crt.o $(OBJ)
 	$(LD) -T memory_map.ld -o app.elf crt.o $(OBJ)

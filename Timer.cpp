@@ -1,6 +1,6 @@
 #include <stdint.h>
-#include "timer.h"
-#include "rcc_register_control.h"
+#include "Timer.h"
+#include "RCCRegisterControl.h"
 
 void tim2_enable_clock(uint16_t AUTO_RELOAD)
 {

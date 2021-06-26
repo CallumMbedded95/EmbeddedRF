@@ -1,4 +1,4 @@
-#include "rcc_register_control.h"
+#include "RCCRegisterControl.h"
 
 // SET TIMING FOR GPIO PORTB
 void set_apb2rstr(uint32_t RCC_REG)
