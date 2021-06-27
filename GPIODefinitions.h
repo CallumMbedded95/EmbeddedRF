@@ -6,13 +6,13 @@
 // GPIOx PORTx BASE ADDRESSES.
 namespace GPIO
 {
-	constexpr uint32_t GPIOA_BASE	= 0x40010800;
-	constexpr uint32_t GPIOB_BASE 	= 0x40010C00;
-	constexpr uint32_t GPIOC_BASE 	= 0x40011000;
-	constexpr uint32_t GPIOD_BASE 	= 0x40011400;
-	constexpr uint32_t GPIOE_BASE 	= 0x40011800;
-	constexpr uint32_t GPIOF_BASE 	= 0x40011C00;
-	constexpr uint32_t GPIOG_BASE 	= 0x40012000;
+	constexpr uint32_t GPIOA_Base	= 0x40010800;
+	constexpr uint32_t GPIOB_Base 	= 0x40010C00;
+	constexpr uint32_t GPIOC_Base 	= 0x40011000;
+	constexpr uint32_t GPIOD_Base 	= 0x40011400;
+	constexpr uint32_t GPIOE_Base 	= 0x40011800;
+	constexpr uint32_t GPIOF_Base 	= 0x40011C00;
+	constexpr uint32_t GPIOG_Base 	= 0x40012000;
 
 	// GPIO PORT SETTINGS (PAGE 171-174).
 	constexpr uint32_t GPIOx_CRL_OFFSET	= 0x00;	// PORT CONFIGURATION REGISTER LOW
@@ -107,10 +107,10 @@ namespace GPIO
 	{
 		return reinterpret_cast<GPIOx_Register*>(GPIOx_BASE);	
 	} 
-
-	// GIVEN A BASE GPIO ADDRESS, GPIO NUM, CNF AND MOD STRINGS,SETS THE CRH REGISTER.;
-	void set_gpio_crh(uint32_t GPIOx_ADDR, uint8_t CNF, uint8_t MOD, uint8_t GPIO_NUM);
-
+	
+	// Set CRH and CRL Registers at Port X to zero.
+	void Init_GPIO_CRx(uint32_t GPIOx_Base_Addr);
+		
 	// Sets the GPIO Output Data Register based on GPIO Num inputted and Output to set.
 	void Set_GPIO_ODR(uint32_t GPIOx_Base_Addr, uint8_t Out, uint8_t GPIO_Num);
 
@@ -120,9 +120,6 @@ namespace GPIO
 	void Set_GPIO_CRL(uint32_t GPIOx_Base_Addr, uint8_t CNF, uint8_t MOD, uint32_t GPIO_NUM);
 
 	void Set_GPIO_CRH(uint32_t GPIOx_Base_Addr, uint8_t CNF, uint8_t MOD, uint32_t GPIO_NUM);
-
-	// GIVEN A BASE GPIO ADDRESS, GPIO NUM AND THE OUTPUT VALUE, SET THE GPIO OUTPUT BIT.
-	void set_gpio_odr(uint32_t GPIOx_ADDR, uint8_t OUT, uint8_t GPIO_NUM);
 };
 
 #endif
