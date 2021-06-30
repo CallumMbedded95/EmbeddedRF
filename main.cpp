@@ -10,8 +10,7 @@
 
 int main (void)
 {
-	set_apb2rstr(RCC_IOPBEN);
-
+	RCC::Set_APB2ENR(RCC::APB2ENR::IOPB_EN);
 	//GPIO::set_gpio_crh(GPIO::GPIOB_Base, 0x0, 0x1U, 0x10U);
 	//GPIO::set_gpio_crh(GPIO::GPIOB_Base, 0x0, 0x1U, 0x14U);
 	//GPIO::set_gpio_crh(GPIO::GPIOB_Base, 0x0, 0x1U, 0x18U);
@@ -21,7 +20,7 @@ int main (void)
 	Set_GPIO_CRH(GPIO::GPIOB_Base, GPIO::GPIO_CRx_CNF_O::GenPushPull, GPIO::GPIO_CRx_MOD::Out10MHz, GPIO::CRx_GPIO::GPIO_Pin_12);
 	Set_GPIO_CRH(GPIO::GPIOB_Base, GPIO::GPIO_CRx_CNF_O::GenPushPull, GPIO::GPIO_CRx_MOD::Out10MHz, GPIO::CRx_GPIO::GPIO_Pin_13);
 
-	tim2_enable_clock(0xFF);
+//	tim2_enable_clock(0xFF);
 		
 	while (1)
 	{

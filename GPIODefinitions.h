@@ -2,6 +2,7 @@
 #define GPIO_DEFINITIONS_H
 
 #include <stdint.h>
+#include "Common.h"
 
 // GPIOx PORTx BASE ADDRESSES.
 namespace GPIO
@@ -105,7 +106,7 @@ namespace GPIO
 	// Returns the GPIOx Register struct for a given GPIO base.
 	constexpr volatile GPIOx_Register* GPIOx_REG(uint32_t GPIOx_BASE)
 	{
-		return reinterpret_cast<GPIOx_Register*>(GPIOx_BASE);	
+		return Common::GetRegister<GPIOx_Register>(GPIOx_BASE);
 	} 
 	
 	// Set CRH and CRL Registers at Port X to zero.
@@ -120,6 +121,6 @@ namespace GPIO
 	void Set_GPIO_CRL(uint32_t GPIOx_Base_Addr, uint8_t CNF, uint8_t MOD, uint32_t GPIO_NUM);
 
 	void Set_GPIO_CRH(uint32_t GPIOx_Base_Addr, uint8_t CNF, uint8_t MOD, uint32_t GPIO_NUM);
-};
+}
 
 #endif
