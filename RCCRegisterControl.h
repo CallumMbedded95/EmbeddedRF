@@ -31,6 +31,57 @@ namespace RCC
 		uint32_t APB1ENR;
 		uint32_t BDCR;	
 	};
+	
+        enum APB1ENR : uint32_t
+	{
+	  TIM2_EN = 	0x0001,
+	  TIM3_EN = 	0x0002,
+	  TIM4_EN = 	0x0004,
+	  TIM5_EN = 	0x0008,
+	  TIM6_EN = 	0x0010,
+	  TIM7_EN =	0x0020,
+	  WWD_GEN = 	0x0800,
+	  SPI2_EN = 	0x4000,
+	  SPI3_EN = 	0x8000,
+	  USART2_EN = 0x20000,
+	  USART3_EN = 0x40000,
+	  USART4_EN = 0x80000,
+	  USART5_EN = 0x100000,
+	  I2C1_EN = 	0x200000,
+	  I2C2_EN = 	0x400000,
+	  CAN1_EN = 	0x2000000,
+	  CAN2_EN = 	0x4000000,
+	  BKP_EN = 	0x8000000,
+	  PWR_EN = 	0x10000000,
+	  DAC_EN = 	0x20000000,
+	};
+
+	enum APB1STR : uint32_t
+	{
+	  TIM2_RST = 	0x0001,
+	  TIM3_RST = 	0x0002,
+	  TIM4_RST = 	0x0004,
+	  TIM5_RST = 	0x0008,
+	  TIM6_RST = 	0x0010,
+	  TIM7_RST =	0x0020,
+	  TIM12_RST = 	0x0040,
+	  TIM13_RST = 	0x0080,
+	  TIM14_RST = 	0x0100,
+	  WWDG_RST = 0x0800,
+	  SPI2_RST = 0x4000,
+	  SPI3_RST = 0x8000,
+	  USART2_RST = 0x20000,
+	  USART3_RST = 	0x40000,
+	  UART4_RST = 	0x80000,
+	  UART5_RST = 	0x100000,
+	  I2C1_RST = 	0x200000,
+	  I2C2_RST = 	0x400000,
+	  USB_RST= 	0x800000,
+	  CAN_RST = 	0x2000000,
+	  BKP_RST = 0x8000000,
+	  PWR_RST = 0x10000000,
+	  DAC_RST = 0x20000000
+	  };
 
 	namespace APB2RSTR
 	{
