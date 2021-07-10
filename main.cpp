@@ -1,29 +1,46 @@
+#include "stm32f10x_gpio.h"
+#include "stm32f10x_rcc.h"
+#include "stm32f10x_usart.h"
+#include "stdlib.h"
+#include "stdarg.h"
 #include <stdint.h>
-#include "GPIODefinitions.h"
-#include "RCCRegisterControl.h"
-#include "Timer.h"
-#include "UART.h"
 
-int main (void)
+#define DEBUG_UART USART1
+#define delay for(int i=0;i<5000000;++i)
+
+//static void printMsg(char *msg, ...);
+static void printMsg();
+
+int main()
 {
-	RCC::Set_APB2ENR(RCC::APB2ENR::IOPB_EN);
-	
-	GPIO::Init_GPIO_CRx(GPIO::GPIOB_Base);	
-	Set_GPIO_CRH(GPIO::GPIOB_Base, GPIO::GPIO_CRx_CNF_O::GenPushPull, GPIO::GPIO_CRx_MOD::Out10MHz, GPIO::CRx_GPIO::GPIO_Pin_12);
-	Set_GPIO_CRH(GPIO::GPIOB_Base, GPIO::GPIO_CRx_CNF_O::GenPushPull, GPIO::GPIO_CRx_MOD::Out10MHz, GPIO::CRx_GPIO::GPIO_Pin_13);
+	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN; //RCC_APB2ENR_IOPAEN | RCC_APB2ENR_AFIOEN | RCC_APB2ENR_USART1EN | 
+	// GPIOA->CRH |= GPIO_CRH_CNF9_1 | GPIO_CRH_MODE9_0 | GPIO_CRH_MODE9_1;
+	// GPIOA->CRH &= ~(GPIO_CRH_CNF9_0);
 
-	//tim2_enable_clock(0xFF);
+	// USART1->BRR = 0x1D4C;
+	// USART1->CR1 |= USART_CR1_TE;
+	// USART1->CR1 |= USART_CR1_UE;
 
-	Enable_UART((uint32_t)UART5, (uint32_t)0);
+	GPIOB->CRH |= GPIO_CRH_MODE12_1;
+	GPIOB->CRH &= ~(GPIO_CRH_CNF12_1 | GPIO_CRH_CNF12_0);
+	GPIOB->ODR |= GPIO_ODR_ODR12;
 
-	RCC::RCC_Register(RCC::RCC_BASE)->APB1ENR |= RCC::APB1ENR::USART5_EN;
-		
-	while (1)
+
+	while(1)
 	{
-	  //if (get_tim2_clock_ctr() > 5000)
-	  //GPIO::Set_GPIO_BSRR(GPIO::GPIOB_Base, 0x1U, GPIO::BSRR_GPIO::GPIO_Pin_12);
-	  //GPIO::Set_GPIO_BSRR(GPIO::GPIOB_Base, 0x1U, GPIO::BSRR_GPIO::GPIO_Pin_13);
-	  //GPIO::Set_GPIO_BSRR(GPIO::GPIOB_Base, 0x1U, GPIO::BSRR_GPIO::GPIO_Pin_14);
-	  UART_Tx_Data((uint32_t)UART5, (uint32_t)'a');
+		//printMsg();
+
+		delay;
+	}
+}
+
+void printMsg()
+{
+	char buff[100];
+
+	for (int i =0;i<100;++i)
+	{
+		USART1->DR = 'a';
+		while ( !(USART1->SR & USART_SR_TXE));
 	}
 }
